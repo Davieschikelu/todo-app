@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-Do App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- right -->
+        <div class="right">
+            <div class="dame">
+                <h3>Enter an item:</h3>
+                <div class="inp">
+                    <input type="text" name="Add to-do" id="toDOIn"/>
+                    <span id="todoErr"></span>
+                </div>
+                <button onclick="addTodo(event)" class="som">add</button>
+
+                <a href="index.html"><button class="dam">LOGOUT</button></a>
+            </div>
+           
+        </div>
+        <!-- left -->
+        <div class="left">
+            <h2 id="logg"></h2>
+             <div class="grid" id="todolist">
+                <!-- <div class="item"></div> -->
+         </div>
+        </div>
+    </div>
+  
+
+    <script>
+        let logged = document.getElementById('logg')
+        let user = JSON.parse(localStorage.getItem('userData'))
+    logged.innerHTML = `Welcome Back ${user.username}`
+        console.log(user.username)
+    </script>
+    <script src="java/script.js"></script>
+</body>
+</html>
