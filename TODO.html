@@ -25,20 +25,19 @@
         </div>
         <!-- left -->
         <div class="left">
-            <h2 id="logg"></h2>
              <div class="grid" id="todolist">
                 <!-- <div class="item"></div> -->
          </div>
         </div>
     </div>
   
-
+    <script src="java/script.js"></script>
     <script>
         let logged = document.getElementById('logg')
         let user = JSON.parse(localStorage.getItem('userData'))
     logged.innerHTML = `Welcome Back ${user.username}`
         console.log(user.username)
     </script>
-    <script src="java/script.js"></script>
+    
 </body>
 </html>

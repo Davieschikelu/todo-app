@@ -107,48 +107,63 @@ function handle2Submit(event){
 
 
 // todo
-let todos = JSON.parse(localStorage.getItem('todos')) || []
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
 function addTodo(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    let toDOIn = document.getElementById('toDOIn').value
-    let todoErr = document.getElementById('todoErr')
+    let todoInput = document.getElementById('toDOIn').value;
+    let todoErr = document.getElementById('todoErr');
     if(toDOIn === ''){
         todoErr.innerHTML = "**please enter an item**"
      }else {
         let newTodo = {
         id: Date.now(),
-        text : toDOIn,
+        text : todoInput,
         completed: false,
     };
      todos.push(newTodo);
     localStorage.setItem("todos", JSON.stringify(todos))
-    toDOIn.value = ''
+    // toDOIn.value = ''
+    window.location.reload();
      }
 }
 
 function showTodo(){
     let todolist = document.getElementById("todolist");
-    // todolist.innerHTML = "";
+    todolist.innerHTML = "";
     
     todos.forEach((todo) => {
-        console.log('here')
+        // console.log('here')
         let todoItem = document.createElement("div");
         todoItem.classList.add("item");
         todoItem.innerHTML = `
-        <h3>${todo.text}</h3>
+        <h3 class="${todo.completed ? 'completed' : ''}">${todo.text}</h3>
         <div class="flex">
         <div>
         <button>delete</button>
         <button>edit</button>
         </div>
-        <input type="checkbox"/>
+        <input type="checkbox" ${todo.completed ? 'checked' : ''} onclick= "toggleComplete(${todo.id})"/>
         </div>
         `
 
         todolist.appendChild(todoItem);
     })
 
-    console.log('after')
+    // console.log('after')
 }
 showTodo()
+
+function toggleComplete(id){
+    todos = todos.map((todo) =>{
+        if(todo.id === id){
+            return{
+                ...todo,
+                completed: !todo.completed
+            }
+        }
+        return todo;
+    })
+    localStorage.setItem("todos", JSON.stringify(todos))
+    showTodo();
+}
