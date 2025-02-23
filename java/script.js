@@ -111,9 +111,9 @@ let todos = JSON.parse(localStorage.getItem("todos")) || [];
 function addTodo(event) {
     event.preventDefault();
 
-    let todoInput = document.getElementById('toDOIn').value;
+    let todoInput = document.getElementById('todoInput').value;
     let todoErr = document.getElementById('todoErr');
-    if(toDOIn === ''){
+    if(todoInput === ''){
         todoErr.innerHTML = "**please enter an item**"
      }else {
         let newTodo = {
@@ -138,10 +138,10 @@ function showTodo(){
         todoItem.classList.add("item");
         todoItem.innerHTML = `
         <h3 class="${todo.completed ? 'completed' : ''}">${todo.text}</h3>
-        <div class="flex">
+        <div class="flex d">
         <div>
-        <button>delete</button>
-        <button>edit</button>
+        <button onclick="deleteTodo(${todo.id})" class="fein">delete</button>
+        <button onclick="editTodo(${todo.id})" class="fein">edit</button>
         </div>
         <input type="checkbox" ${todo.completed ? 'checked' : ''} onclick= "toggleComplete(${todo.id})"/>
         </div>
@@ -165,5 +165,20 @@ function toggleComplete(id){
         return todo;
     })
     localStorage.setItem("todos", JSON.stringify(todos))
+    showTodo();
+}
+
+function deleteTodo(todoId){
+    todos = todos.filter((todo) => todo.id !== todoId);
+    localStorage.setItem("todos", JSON.stringify(todos))
+    showTodo();
+}
+
+function editTodo(todoId){
+    let todo  = todos.find((todo) => todo.id === todoId);
+    let todoInput = document.getElementById('todoInput')
+todoInput.value = todo.text;
+todos = todos.filter((todo) => todo.id !== todoId); 
+localStorage.setItem("todos", JSON.stringify(todos));
     showTodo();
 }
