@@ -99,7 +99,7 @@ function handle2Submit(event){
            }
 
            localStorage.setItem('userData', JSON.stringify(userData))
-           alert('SignUp done\nLogIn')
+           alert('SignUp Successful!')
             window.location.href = "index.html"
     }
 }
